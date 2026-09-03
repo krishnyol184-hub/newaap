@@ -433,16 +433,15 @@ async def fetch_freejobalert() -> List[Dict]:
 
 
 async def refresh_vacancies_into_db(db) -> int:
-    """Refresh vacancies from ALL sources (FreeJobAlert + Haryana DC Rate/HKRN).
+    """Refresh vacancies from FreeJobAlert only.
 
     Duplicate protection:
       1. Same URL            -> update existing doc (never a new post)
-      2. Same normalized title across sources (different URL) -> merge into the
+      2. Same normalized title (different URL) -> merge into the
          existing doc instead of creating a duplicate post (dedupe_key match)
     """
     fja = await fetch_freejobalert()
-    dcr = await fetch_haryana_dcrate()
-    vacs = fja + dcr
+    vacs = fja
     if not vacs:
         return 0
     added = 0
