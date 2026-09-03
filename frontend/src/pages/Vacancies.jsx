@@ -6,7 +6,7 @@ import PushSubscribeButton from "@/components/PushSubscribeButton";
 import { useAuth } from "@/context/AuthContext";
 import { useI18n } from "@/context/I18nContext";
 import { toast } from "sonner";
-import { FaSearch, FaExternalLinkAlt, FaSync, FaCalendarAlt, FaBriefcase, FaClock, FaChevronRight, FaGraduationCap, FaBuilding, FaFileAlt, FaGlobe, FaShareAlt, FaBookmark, FaRegBookmark, FaMapMarkerAlt, FaWhatsapp, FaUsers } from "react-icons/fa";
+import { FaSearch, FaExternalLinkAlt, FaSync, FaCalendarAlt, FaBriefcase, FaClock, FaChevronRight, FaGraduationCap, FaBuilding, FaFileAlt, FaGlobe, FaShareAlt, FaBookmark, FaRegBookmark, FaMapMarkerAlt, FaWhatsapp, FaUsers, FaArrowRight } from "react-icons/fa";
 import { WHATSAPP_CHANNEL_URL } from "@/lib/whatsapp";
 import ShareModal from "@/components/poster/ShareModal";
 import SEO from "@/components/SEO";
@@ -296,7 +296,7 @@ const Vacancies = () => {
         <div className="glass-strong px-4 sm:px-5 py-4">
           {latestJobs.length === 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-              {[...Array(9)].map((_, i) => <div key={i} className="h-11 rounded-xl bg-white/5 animate-pulse" />)}
+              {[...Array(9)].map((_, i) => <div key={i} className="h-32 rounded-2xl bg-white/5 animate-pulse" />)}
             </div>
           ) : (
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -307,34 +307,24 @@ const Vacancies = () => {
                 <li key={v.id || i}>
                   <Link
                     to={`/vacancies/${v.id}`}
-                    className="group flex flex-col h-full rounded-xl bg-white/[0.05] border border-white/10 hover:border-blue-400/50 hover:bg-blue-500/10 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-900/30 transition-all duration-200 overflow-hidden"
+                    className="nu-card group"
                     data-testid={`new-update-${i}`}
                   >
-                    <div className="flex items-start gap-2.5 px-3.5 pt-3.5 pb-2">
-                      <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white grid place-items-center text-xs font-black shrink-0 shadow-md shadow-blue-500/30">
-                        {i + 1}
-                      </span>
-                      <span className="text-[13px] font-bold text-slate-100 group-hover:text-white leading-snug line-clamp-2 flex-1">
-                        {v.post_name || v.title}
-                      </span>
+                    <div className="flex items-start gap-3">
+                      <span className="nu-icon"><FaBriefcase /></span>
+                      <div className="min-w-0 flex-1">
+                        <div className="nu-title line-clamp-2">{v.post_name || v.title}</div>
+                        <div className="nu-sub line-clamp-2 mt-1">
+                          {v.organization || v.qualification || (lang === "hi" ? "सरकारी भर्ती नोटिफिकेशन" : "Government job notification")}
+                        </div>
+                      </div>
                     </div>
-                    <div className="mt-auto px-3.5 pb-3 flex items-center gap-2 flex-wrap">
-                      {posts && (
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-blue-300 bg-blue-500/15 border border-blue-500/30 px-2 py-0.5 rounded-full">
-                          <FaUsers className="text-[9px]" /> {posts} Posts
-                        </span>
-                      )}
-                      {v.qualification && (
-                        <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-sky-300 bg-sky-500/10 border border-sky-500/25 px-2 py-0.5 rounded-full max-w-[140px] truncate">
-                          <FaGraduationCap className="text-[9px] shrink-0" /> {v.qualification}
-                        </span>
-                      )}
-                      {v.last_date_text && (
-                        <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-blue-300 bg-blue-500/10 border border-blue-500/25 px-2 py-0.5 rounded-full max-w-[130px] truncate">
-                          <FaCalendarAlt className="text-[9px] shrink-0" /> {v.last_date_text}
-                        </span>
-                      )}
-                      <FaChevronRight className="ml-auto text-[10px] text-blue-400 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                    <div className="mt-auto pt-3 flex items-center justify-between gap-2">
+                      <span className="nu-pill">
+                        <FaUsers className="text-[10px]" />
+                        {posts ? `${posts} Posts` : (v.last_date_text || (lang === "hi" ? "विवरण देखें" : "View details"))}
+                      </span>
+                      <FaArrowRight className="nu-arrow text-sm shrink-0" />
                     </div>
                   </Link>
                 </li>
