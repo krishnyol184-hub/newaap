@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet, Link, NavLink, useNavigate, Navigate } from "react-router-dom";
-import { FaCog, FaSearch, FaEdit, FaSignOutAlt, FaHome, FaExternalLinkAlt, FaBriefcase, FaNewspaper, FaFileAlt } from "react-icons/fa";
+import {
+  FaTachometerAlt, FaThumbtack, FaSearch, FaEdit, FaSignOutAlt, FaHome,
+  FaExternalLinkAlt, FaBriefcase, FaNewspaper, FaFileAlt, FaBars, FaWordpress, FaUserCircle
+} from "react-icons/fa";
 import { getAdminToken, clearAdminToken } from "./adminAuth";
 
 const AdminLayout = () => {
   const nav = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
   if (!getAdminToken()) return <Navigate to="/admin/login" replace />;
 
   const logout = () => {
@@ -13,66 +17,63 @@ const AdminLayout = () => {
   };
 
   const linkClass = ({ isActive }) =>
-    `flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+    `flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium transition-colors border-l-[3px] ${
       isActive
-        ? "bg-blue-600 text-white"
-        : "text-slate-700 hover:bg-slate-100"
+        ? "bg-[#2271b1] text-white border-white"
+        : "text-[#c3c4c7] border-transparent hover:text-white hover:bg-white/5"
     }`;
 
+  const items = [
+    { to: "/admin", end: true, label: "Dashboard", icon: FaTachometerAlt, testid: "admin-nav-dashboard" },
+    { to: "/admin/blogs", label: "Posts", icon: FaThumbtack, testid: "admin-nav-blogs" },
+    { to: "/admin/vacancies", label: "Vacancies", icon: FaBriefcase, testid: "admin-nav-vacancies" },
+    { to: "/admin/job-seo", label: "Job SEO", icon: FaSearch, testid: "admin-nav-job-seo" },
+    { to: "/admin/resumes", label: "CV Templates", icon: FaFileAlt, testid: "admin-nav-resumes" },
+    { to: "/admin/seo", label: "Site SEO", icon: FaNewspaper, testid: "admin-nav-seo" },
+    { to: "/admin/content", label: "Front-page Text", icon: FaEdit, testid: "admin-nav-content" },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-slate-50" data-testid="admin-layout">
-      <aside className="md:w-60 md:min-h-screen border-r border-slate-200 bg-white p-4 flex md:flex-col gap-4 md:gap-6">
-        <Link to="/admin" className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-lg bg-blue-600 text-white grid place-items-center">
-            <FaCog />
-          </div>
-          <div>
-            <div className="text-sm font-bold text-slate-900">Admin Panel</div>
-            <div className="text-[10px] text-slate-500 uppercase tracking-wider">HR Digital Services</div>
-          </div>
-        </Link>
-        <nav className="flex md:flex-col gap-1 flex-1" data-testid="admin-nav">
-          <NavLink to="/admin/vacancies" className={linkClass} data-testid="admin-nav-vacancies">
-            <FaBriefcase /> Manual Vacancies
-          </NavLink>
-          <NavLink to="/admin/job-seo" className={linkClass} data-testid="admin-nav-job-seo">
-            <FaSearch /> Job SEO Manager
-          </NavLink>
-          <NavLink to="/admin/blogs" className={linkClass} data-testid="admin-nav-blogs">
-            <FaNewspaper /> Manage Blogs
-          </NavLink>
-          <NavLink to="/admin/resumes" className={linkClass} data-testid="admin-nav-resumes">
-            <FaFileAlt /> CV Templates
-          </NavLink>
-          <NavLink to="/admin/seo" className={linkClass} data-testid="admin-nav-seo">
-            <FaSearch /> Site SEO
-          </NavLink>
-          <NavLink to="/admin/content" className={linkClass} data-testid="admin-nav-content">
-            <FaEdit /> Front-page Text
-          </NavLink>
-        </nav>
-        <div className="md:mt-auto flex flex-col gap-2">
-          <a
-            href="/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100"
-            data-testid="admin-view-site"
-          >
-            <FaHome /> View Site <FaExternalLinkAlt className="text-[9px]" />
-          </a>
-          <button
-            onClick={logout}
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-red-600 hover:bg-red-50"
-            data-testid="admin-logout"
-          >
-            <FaSignOutAlt /> Logout
-          </button>
+    <div className="min-h-screen bg-[#f0f0f1]" data-testid="admin-layout">
+      {/* Top admin bar */}
+      <header className="fixed top-0 inset-x-0 h-11 bg-[#1d2327] text-[#c3c4c7] flex items-center px-3 gap-3 z-50 text-[13px]">
+        <button onClick={() => setCollapsed((c) => !c)} className="p-1.5 rounded hover:bg-white/10 md:hidden" data-testid="admin-sidebar-toggle">
+          <FaBars />
+        </button>
+        <span className="flex items-center gap-2 font-semibold text-white">
+          <FaWordpress className="text-lg" /> HR Digital Services
+        </span>
+        <a href="/" target="_blank" rel="noreferrer" className="hidden sm:inline-flex items-center gap-1.5 hover:text-white" data-testid="admin-topbar-view-site">
+          <FaHome /> Visit Site
+        </a>
+        <div className="ml-auto flex items-center gap-2">
+          <span className="hidden sm:inline">Howdy, <b className="text-white">Admin</b></span>
+          <FaUserCircle className="text-xl text-white/80" />
         </div>
-      </aside>
-      <main className="flex-1 p-4 md:p-8">
-        <Outlet />
-      </main>
+      </header>
+
+      <div className="flex pt-11">
+        {/* Sidebar */}
+        <aside className={`${collapsed ? "hidden" : "flex"} md:flex flex-col fixed md:sticky top-11 left-0 h-[calc(100vh-2.75rem)] w-[200px] bg-[#1e293b] shrink-0 z-40 overflow-y-auto`}>
+          <nav className="flex-1 py-3" data-testid="admin-nav">
+            {items.map((it) => (
+              <NavLink key={it.to} to={it.to} end={it.end} className={linkClass} data-testid={it.testid} onClick={() => setCollapsed(false)}>
+                <it.icon className="text-[15px] w-4 shrink-0" /> {it.label}
+              </NavLink>
+            ))}
+          </nav>
+          <div className="border-t border-white/10 py-2">
+            <button onClick={logout} className="w-full flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium text-red-300 hover:text-white hover:bg-red-500/20 transition-colors" data-testid="admin-logout">
+              <FaSignOutAlt className="w-4" /> Logout
+            </button>
+          </div>
+        </aside>
+
+        {/* Main */}
+        <main className="flex-1 min-w-0 p-4 md:p-6" data-testid="admin-main">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };

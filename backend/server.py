@@ -1609,6 +1609,10 @@ def _slugify(text: str) -> str:
     return f"{s}-{uuid.uuid4().hex[:6]}"
 
 
+def _csv_list(s: str, limit: int = 30):
+    return [x.strip()[:60] for x in (s or "").split(",") if x.strip()][:limit]
+
+
 @api.get("/blogs")
 async def list_blogs(limit: int = 50):
     rows = await db.blogs.find({"status": "published"}).sort("created_at", -1).to_list(min(limit, 100))
@@ -1635,6 +1639,11 @@ async def admin_create_blog(
     excerpt: str = Form(""),
     content: str = Form(""),
     status: str = Form("published"),
+    categories: str = Form(""),
+    tags: str = Form(""),
+    focus_keyword: str = Form(""),
+    seo_title: str = Form(""),
+    seo_description: str = Form(""),
     image: Optional[UploadFile] = File(None),
     _=Depends(require_admin),
 ):
@@ -1649,6 +1658,11 @@ async def admin_create_blog(
         "content": content,
         "status": status if status in ("published", "draft") else "published",
         "image_url": image_url,
+        "categories": _csv_list(categories),
+        "tags": _csv_list(tags),
+        "focus_keyword": focus_keyword.strip()[:120],
+        "seo_title": seo_title.strip()[:200],
+        "seo_description": seo_description.strip()[:400],
         "author": "HR Digital Services",
         "created_at": now,
         "updated_at": now,
@@ -1656,6 +1670,16 @@ async def admin_create_blog(
     res = await db.blogs.insert_one(doc)
     doc["_id"] = res.inserted_id
     return doc_public(doc)
+
+
+@api.get("/admin/blog-taxonomy")
+async def admin_blog_taxonomy(_=Depends(require_admin)):
+    cats = await db.blogs.distinct("categories")
+    tags = await db.blogs.distinct("tags")
+    return {
+        "categories": sorted([c for c in cats if c]),
+        "tags": sorted([t for t in tags if t]),
+    }
 
 
 @api.put("/admin/blogs/{blog_id}")
@@ -1666,6 +1690,11 @@ async def admin_update_blog(
     content: str = Form(""),
     status: str = Form("published"),
     slug: str = Form(""),
+    categories: str = Form(""),
+    tags: str = Form(""),
+    focus_keyword: str = Form(""),
+    seo_title: str = Form(""),
+    seo_description: str = Form(""),
     image: Optional[UploadFile] = File(None),
     _=Depends(require_admin),
 ):
@@ -1681,6 +1710,11 @@ async def admin_update_blog(
         "excerpt": excerpt.strip()[:400],
         "content": content,
         "status": status if status in ("published", "draft") else "published",
+        "categories": _csv_list(categories),
+        "tags": _csv_list(tags),
+        "focus_keyword": focus_keyword.strip()[:120],
+        "seo_title": seo_title.strip()[:200],
+        "seo_description": seo_description.strip()[:400],
         "updated_at": datetime.now(timezone.utc),
     }
     if slug.strip():
@@ -1953,7 +1987,7 @@ async def start_scheduler():
 
     _scheduler.add_job(_job, "interval", hours=1, next_run_time=datetime.now(timezone.utc))
     _scheduler.start()
-    log.info("Scheduler started (vacancies every 1h — FreeJobAlert + Haryana DC Rate)")
+    log.info("Scheduler started (vacancies every 1h — FreeJobAlert)")
 
 
 @app.on_event("shutdown")
