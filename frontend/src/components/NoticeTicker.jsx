@@ -23,7 +23,7 @@ const NoticeTicker = () => {
               <span key={n.id || i} className="news-item font-hindi">
                 {lang === "hi" ? n.title_hi : n.title_en}
                 {n.type === "important" && <span className="new-badge">NEW</span>}
-                <span className="mx-4 text-blue-400">|</span>
+                <span className="mx-4 text-teal-400">|</span>
               </span>
             ))}
           </Marquee>

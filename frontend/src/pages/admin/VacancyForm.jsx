@@ -112,7 +112,7 @@ const VacancyForm = ({ initial, onClose, onSaved }) => {
     </label>
   );
 
-  const inputCls = "mt-1 w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-blue-500 outline-none text-sm text-slate-900 bg-white";
+  const inputCls = "mt-1 w-full px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-500 outline-none text-sm text-slate-900 bg-white";
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex justify-end" data-testid="vacancy-form-overlay">
@@ -140,7 +140,7 @@ const VacancyForm = ({ initial, onClose, onSaved }) => {
             <button
               type="submit"
               disabled={busy}
-              className="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white text-xs font-semibold inline-flex items-center gap-1.5"
+              className="px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 disabled:opacity-60 text-white text-xs font-semibold inline-flex items-center gap-1.5"
               data-testid="vacancy-form-save"
             >
               <FaSave className="text-[10px]" /> {busy ? "Saving…" : "Save"}
@@ -218,10 +218,10 @@ const VacancyForm = ({ initial, onClose, onSaved }) => {
           <div className="rounded-xl border-2 border-slate-200 bg-slate-50 p-4 space-y-3" data-testid="vacancy-form-seo-card">
             <div className="flex items-center justify-between">
               <span className="text-[11px] font-bold uppercase tracking-wider text-slate-600">SEO Settings (Rank Math Style)</span>
-              <span className={`text-sm font-extrabold ${seo.score >= 75 ? "text-green-600" : seo.score >= 45 ? "text-blue-600" : "text-red-500"}`} data-testid="vacancy-form-seo-score">{seo.score}/100</span>
+              <span className={`text-sm font-extrabold ${seo.score >= 75 ? "text-green-600" : seo.score >= 45 ? "text-teal-600" : "text-red-500"}`} data-testid="vacancy-form-seo-score">{seo.score}/100</span>
             </div>
             <div className="h-1.5 bg-slate-200 rounded-full overflow-hidden">
-              <div className={`h-full transition-all ${seo.score >= 75 ? "bg-green-500" : seo.score >= 45 ? "bg-blue-500" : "bg-red-500"}`} style={{ width: `${seo.score}%` }} />
+              <div className={`h-full transition-all ${seo.score >= 75 ? "bg-green-500" : seo.score >= 45 ? "bg-teal-500" : "bg-red-500"}`} style={{ width: `${seo.score}%` }} />
             </div>
             <Field label="Custom SEO Title">
               <input value={f.seo_title} onChange={(e) => upd("seo_title", e.target.value)}
