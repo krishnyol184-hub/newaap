@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import api from "@/lib/api";
 import JobAlertSubscribe from "@/components/JobAlertSubscribe";
 import PushSubscribeButton from "@/components/PushSubscribeButton";
+import HeroCarousel from "@/components/HeroCarousel";
 import { useAuth } from "@/context/AuthContext";
 import { useI18n } from "@/context/I18nContext";
 import { toast } from "sonner";
@@ -258,6 +259,7 @@ const Vacancies = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-10" data-testid="vacancies-page">
       <SEO seoKey="seo:vacancies" path="/" />
+      <HeroCarousel />
       <div className="flex items-start justify-between flex-wrap gap-3 mb-6">
         <div>
           <div className="section-eyebrow">Live Jobs Feed</div>

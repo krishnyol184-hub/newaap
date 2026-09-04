@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Outlet, Link, NavLink, useNavigate, Navigate } from "react-router-dom";
 import {
   FaTachometerAlt, FaThumbtack, FaSearch, FaEdit, FaSignOutAlt, FaHome,
-  FaExternalLinkAlt, FaBriefcase, FaNewspaper, FaFileAlt, FaBars, FaWordpress, FaUserCircle, FaChartLine
+  FaExternalLinkAlt, FaBriefcase, FaNewspaper, FaFileAlt, FaBars, FaWordpress, FaUserCircle, FaChartLine, FaImages
 } from "react-icons/fa";
 import { getAdminToken, clearAdminToken } from "./adminAuth";
 
@@ -26,6 +26,7 @@ const AdminLayout = () => {
   const items = [
     { to: "/admin", end: true, label: "Dashboard", icon: FaTachometerAlt, testid: "admin-nav-dashboard" },
     { to: "/admin/blogs", label: "Posts", icon: FaThumbtack, testid: "admin-nav-blogs" },
+    { to: "/admin/slides", label: "News Slider", icon: FaImages, testid: "admin-nav-slides" },
     { to: "/admin/vacancies", label: "Vacancies", icon: FaBriefcase, testid: "admin-nav-vacancies" },
     { to: "/admin/job-seo", label: "Job SEO", icon: FaSearch, testid: "admin-nav-job-seo" },
     { to: "/admin/resumes", label: "CV Templates", icon: FaFileAlt, testid: "admin-nav-resumes" },

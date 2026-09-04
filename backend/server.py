@@ -1701,6 +1701,94 @@ async def update_site_settings(payload: dict = Body(...), _=Depends(require_admi
     return {"ok": True, **update}
 
 
+# ─────────── Hero News Slider (carousel) ───────────
+@api.get("/slides")
+async def public_slides():
+    out = []
+    async for s in db.slides.find({"active": True}).sort("order", 1):
+        out.append(doc_public(s))
+    return out
+
+
+@api.get("/admin/slides")
+async def admin_list_slides(_=Depends(require_admin)):
+    out = []
+    async for s in db.slides.find({}).sort("order", 1):
+        out.append(doc_public(s))
+    return out
+
+
+@api.post("/admin/slides")
+async def admin_create_slide(
+    title: str = Form(""),
+    subtitle: str = Form(""),
+    link: str = Form(""),
+    order: int = Form(0),
+    active: bool = Form(True),
+    image: Optional[UploadFile] = File(None),
+    _=Depends(require_admin),
+):
+    image_url = ""
+    if image and image.filename:
+        image_url, _ = await _save_public_file(image, BLOG_IMAGE_MIME)
+    now = datetime.now(timezone.utc)
+    doc = {
+        "title": title.strip()[:200],
+        "subtitle": subtitle.strip()[:300],
+        "link": link.strip()[:500],
+        "order": int(order),
+        "active": bool(active),
+        "image_url": image_url,
+        "created_at": now,
+        "updated_at": now,
+    }
+    res = await db.slides.insert_one(doc)
+    doc["_id"] = res.inserted_id
+    return doc_public(doc)
+
+
+@api.put("/admin/slides/{slide_id}")
+async def admin_update_slide(
+    slide_id: str,
+    title: str = Form(""),
+    subtitle: str = Form(""),
+    link: str = Form(""),
+    order: int = Form(0),
+    active: bool = Form(True),
+    image: Optional[UploadFile] = File(None),
+    _=Depends(require_admin),
+):
+    try:
+        oid = ObjectId(slide_id)
+    except Exception:
+        raise HTTPException(400, "Invalid id")
+    existing = await db.slides.find_one({"_id": oid})
+    if not existing:
+        raise HTTPException(404, "Slide not found")
+    update = {
+        "title": title.strip()[:200],
+        "subtitle": subtitle.strip()[:300],
+        "link": link.strip()[:500],
+        "order": int(order),
+        "active": bool(active),
+        "updated_at": datetime.now(timezone.utc),
+    }
+    if image and image.filename:
+        update["image_url"], _ = await _save_public_file(image, BLOG_IMAGE_MIME)
+    await db.slides.update_one({"_id": oid}, {"$set": update})
+    return doc_public(await db.slides.find_one({"_id": oid}))
+
+
+@api.delete("/admin/slides/{slide_id}")
+async def admin_delete_slide(slide_id: str, _=Depends(require_admin)):
+    try:
+        oid = ObjectId(slide_id)
+    except Exception:
+        raise HTTPException(400, "Invalid id")
+    await db.slides.delete_one({"_id": oid})
+    return {"ok": True}
+
+
 @api.put("/admin/blogs/{blog_id}")
 async def admin_update_blog(
     blog_id: str,
