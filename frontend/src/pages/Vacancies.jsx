@@ -402,35 +402,33 @@ const Vacancies = () => {
                 <option key={qOpt.key} value={qOpt.key}>{lang === "hi" ? qOpt.hi : qOpt.en}</option>
               ))}
             </select>
+            <select
+              value={category}
+              onChange={(e) => { setCategory(e.target.value); setState("all"); setQualification("all"); scrollToList(); }}
+              className="input md:w-48"
+              data-testid="vacancies-category-filter"
+            >
+              {Object.entries(CAT_LABELS).map(([k, v]) => (
+                <option key={k} value={k}>{lang === "hi" ? v.hi : v.en}</option>
+              ))}
+            </select>
+            <select
+              value={state}
+              onChange={(e) => { setState(e.target.value); setCategory("all"); setQualification("all"); scrollToList(); }}
+              className="input md:w-48"
+              data-testid="vacancies-state-filter"
+            >
+              {STATES.map((s) => (
+                <option key={s.key} value={s.key}>{lang === "hi" ? s.hi : s.en}</option>
+              ))}
+            </select>
           </div>
 
         </div>
       </div>
 
-      {/* Category + State filters — dropdowns matching the All Qualifications select */}
-      <div id="all-vacancies" className="scroll-mt-28"></div>
-      <div className="mb-6 flex flex-col sm:flex-row gap-3" data-testid="vacancies-filter-row">
-        <select
-          value={category}
-          onChange={(e) => { setCategory(e.target.value); setState("all"); setQualification("all"); scrollToList(); }}
-          className="input sm:w-56"
-          data-testid="vacancies-category-filter"
-        >
-          {Object.entries(CAT_LABELS).map(([k, v]) => (
-            <option key={k} value={k}>{lang === "hi" ? v.hi : v.en}</option>
-          ))}
-        </select>
-        <select
-          value={state}
-          onChange={(e) => { setState(e.target.value); setCategory("all"); setQualification("all"); scrollToList(); }}
-          className="input sm:w-56"
-          data-testid="vacancies-state-filter"
-        >
-          {STATES.map((s) => (
-            <option key={s.key} value={s.key}>{lang === "hi" ? s.hi : s.en}</option>
-          ))}
-        </select>
-      </div>
+      {/* Anchor for scroll-to-list */}
+      <div id="all-vacancies" className="scroll-mt-28 mb-2"></div>
 
       {/* Vacancy list */}
       {loading ? (
