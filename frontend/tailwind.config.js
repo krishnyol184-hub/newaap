@@ -24,11 +24,9 @@ module.exports = {
           foreground: 'hsl(var(--popover-foreground))'
         },
         primary: {
-          DEFAULT: '#0d9488',
-          dark: '#0f766e',
-          foreground: '#ffffff'
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))'
         },
-        'primary-dark': '#0f766e',
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))'
@@ -38,20 +36,9 @@ module.exports = {
           foreground: 'hsl(var(--muted-foreground))'
         },
         accent: {
-          DEFAULT: '#E6F5F1',
-          foreground: '#0d9488'
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))'
         },
-        success: {
-          DEFAULT: '#EAF7F0',
-          border: '#A7D8BE',
-          foreground: '#0F5132'
-        },
-        whatsapp: {
-          DEFAULT: '#25D366',
-          dark: '#128C7E'
-        },
-        bg: '#F1ECDE',
-        text: '#1E293B',
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))'

@@ -70,7 +70,7 @@ const AdminHome = () => {
           testid="admin-card-content"
         />
       </div>
-      <div className="mt-10 rounded-xl bg-blue-50 border border-blue-200 p-4 text-sm text-blue-900 max-w-3xl">
+      <div className="mt-10 rounded-xl bg-amber-50 border border-amber-200 p-4 text-sm text-amber-900 max-w-3xl">
         <strong>Coming soon:</strong> Announcement banners, offer posters and image uploads.
       </div>
     </div>

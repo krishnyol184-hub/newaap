@@ -14,8 +14,8 @@ import WhatsAppSummaryCard from "@/components/WhatsAppSummaryCard";
 import SEO from "@/components/SEO";
 
 const KIND_META = {
-  apply:        { hi: "ऑनलाइन आवेदन",   en: "Apply Online",       icon: FaCheckCircle,     cls: "bg-teal-500/10 border-teal-500/30 hover:bg-teal-500/15", iconCls: "text-teal-400" },
-  notification: { hi: "अधिसूचना PDF",    en: "Notification PDF",   icon: FaFilePdf,         cls: "bg-teal-500/10 border-teal-500/30 hover:bg-teal-500/15",     iconCls: "text-teal-400" },
+  apply:        { hi: "ऑनलाइन आवेदन",   en: "Apply Online",       icon: FaCheckCircle,     cls: "bg-blue-500/10 border-blue-500/30 hover:bg-blue-500/15", iconCls: "text-blue-400" },
+  notification: { hi: "अधिसूचना PDF",    en: "Notification PDF",   icon: FaFilePdf,         cls: "bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/15",     iconCls: "text-amber-400" },
   official:     { hi: "आधिकारिक वेबसाइट", en: "Official Website",  icon: FaExternalLinkAlt, cls: "bg-sky-500/10 border-sky-500/30 hover:bg-sky-500/15",           iconCls: "text-sky-400" },
 };
 
@@ -180,7 +180,7 @@ const VacancyDetail = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShareOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-400 hover:to-teal-500 text-white text-xs font-bold shadow-lg shadow-teal-500/30 transition-transform hover:scale-105 border border-teal-300/40"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-500/30 transition-transform hover:scale-105 border border-blue-300/40"
             data-testid="share-vacancy"
             title={lang === "hi" ? "पोस्टर बनाएँ और शेयर करें" : "Generate poster & share"}
           >
@@ -211,19 +211,19 @@ const VacancyDetail = () => {
           </div>
         </div>
       ) : urgent && v.last_date_text ? (
-        <div className="mb-5 rounded-xl border-2 border-red-500/60 bg-gradient-to-r from-red-500/15 via-teal-500/15 to-red-500/15 p-4 flex items-center gap-3 shadow-lg shadow-red-500/20 animate-pulse-slow" data-testid="vacancy-urgent-banner">
-          <div className="w-11 h-11 rounded-full bg-gradient-to-br from-red-500 to-teal-500 text-white flex items-center justify-center text-xl shrink-0 shadow-lg shadow-red-500/40">
+        <div className="mb-5 rounded-xl border-2 border-red-500/60 bg-gradient-to-r from-red-500/15 via-orange-500/15 to-red-500/15 p-4 flex items-center gap-3 shadow-lg shadow-red-500/20 animate-pulse-slow" data-testid="vacancy-urgent-banner">
+          <div className="w-11 h-11 rounded-full bg-gradient-to-br from-red-500 to-orange-500 text-white flex items-center justify-center text-xl shrink-0 shadow-lg shadow-red-500/40">
             <FaClock />
           </div>
           <div className="flex-1">
-            <div className="text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-teal-300 font-extrabold text-lg tracking-wide uppercase">
+            <div className="text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-orange-300 font-extrabold text-lg tracking-wide uppercase">
               {days === 0
                 ? (lang === "hi" ? "आज अंतिम दिन!" : "LAST DAY TO APPLY!")
                 : days === 1
                   ? (lang === "hi" ? "कल अंतिम तिथि!" : "TOMORROW IS THE LAST DATE!")
                   : (lang === "hi" ? `केवल ${days} दिन बाकी` : `ONLY ${days} DAYS LEFT`)}
             </div>
-            <div className="text-teal-200/90 text-xs mt-0.5">
+            <div className="text-orange-200/90 text-xs mt-0.5">
               {lang === "hi"
                 ? `अंतिम तिथि: ${v.last_date_text}। जल्दी आवेदन करें।`
                 : `Last date: ${v.last_date_text}. Apply as soon as possible.`}
@@ -304,7 +304,7 @@ const VacancyDetail = () => {
             {v.structured?.apply_end || v.last_date_text || "—"}
           </div>
           {days !== null && days >= 0 && !expired && (
-            <div className={`stat-sub ${urgent ? "text-red-200" : "text-teal-200"}`}>
+            <div className={`stat-sub ${urgent ? "text-red-200" : "text-amber-200"}`}>
               {days === 0 ? (lang === "hi" ? "आज अंतिम" : "Today") : lang === "hi" ? `${days} दिन बाकी` : `${days}d left`}
             </div>
           )}
@@ -328,7 +328,7 @@ const VacancyDetail = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6" data-testid="vacancy-secondary">
           {v.structured?.salary && (
             <div className="detail-row">
-              <div className="detail-icon bg-teal-500/10 text-teal-400"><FaMoneyBillWave /></div>
+              <div className="detail-icon bg-blue-500/10 text-blue-400"><FaMoneyBillWave /></div>
               <div className="flex-1 min-w-0">
                 <div className="detail-label">{lang === "hi" ? "वेतन / पे स्केल" : "Salary / Pay Scale"}</div>
                 <div className="detail-val">{v.structured.salary}</div>
@@ -346,7 +346,7 @@ const VacancyDetail = () => {
           )}
           {v.structured?.age_limit && (
             <div className="detail-row">
-              <div className="detail-icon bg-teal-500/10 text-teal-400"><FaUserCheck /></div>
+              <div className="detail-icon bg-amber-500/10 text-amber-400"><FaUserCheck /></div>
               <div className="flex-1 min-w-0">
                 <div className="detail-label">{lang === "hi" ? "आयु सीमा" : "Age Limit"}</div>
                 <div className="detail-val">{v.structured.age_limit}</div>
@@ -378,7 +378,7 @@ const VacancyDetail = () => {
       {v.structured?.application_fee?.includes(" · ") && (
         <div className="glass p-5 mb-6" data-testid="fee-breakdown">
           <div className="section-eyebrow mb-3 flex items-center gap-2">
-            <FaRupeeSign className="text-teal-400" />{lang === "hi" ? "श्रेणीवार शुल्क" : "Fee Breakdown"}
+            <FaRupeeSign className="text-blue-400" />{lang === "hi" ? "श्रेणीवार शुल्क" : "Fee Breakdown"}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2" data-testid="fee-breakdown-list">
             {v.structured.application_fee.split(" · ").map((f, i) => (
@@ -400,7 +400,7 @@ const VacancyDetail = () => {
             href={v.apply_url}
             target="_blank"
             rel="noreferrer nofollow"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-teal-500 hover:bg-teal-600 text-white font-semibold shadow-lg shadow-teal-500/30"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-semibold shadow-lg shadow-blue-500/30"
             data-testid="vacancy-manual-apply-btn"
           >
             {lang === "hi" ? "अभी आवेदन करें" : "Apply Now"}

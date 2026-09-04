@@ -61,8 +61,8 @@ const JobAlertSubscribe = () => {
 
   if (done) {
     return (
-      <div className="glass p-6 mb-6 border-teal-500/30 flex items-center gap-4" data-testid="job-alert-success">
-        <div className="w-12 h-12 rounded-full bg-teal-500/15 border border-teal-500/40 flex items-center justify-center text-teal-400 text-xl">
+      <div className="glass p-6 mb-6 border-blue-500/30 flex items-center gap-4" data-testid="job-alert-success">
+        <div className="w-12 h-12 rounded-full bg-blue-500/15 border border-blue-500/40 flex items-center justify-center text-blue-400 text-xl">
           <FaCheck />
         </div>
         <div>
@@ -88,7 +88,7 @@ const JobAlertSubscribe = () => {
         data-testid="job-alert-toggle"
       >
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-400">
+          <div className="w-10 h-10 rounded-full bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400">
             <FaBell className={expanded ? "" : "animate-pulse"} />
           </div>
           <div>
@@ -100,7 +100,7 @@ const JobAlertSubscribe = () => {
             </div>
           </div>
         </div>
-        <span className="text-teal-400 text-xs font-semibold shrink-0 ml-2">
+        <span className="text-blue-400 text-xs font-semibold shrink-0 ml-2">
           {expanded ? (lang === "hi" ? "बंद करें" : "Hide") : (lang === "hi" ? "सब्सक्राइब करें" : "Subscribe")}
         </span>
       </button>
@@ -127,7 +127,7 @@ const JobAlertSubscribe = () => {
                   onClick={() => toggle(cats, setCats, c.key)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition ${
                     cats.includes(c.key)
-                      ? "bg-teal-500/15 text-teal-300 border-teal-500/40"
+                      ? "bg-blue-500/15 text-blue-300 border-blue-500/40"
                       : "bg-white/[0.03] text-slate-400 border-white/10 hover:text-white"
                   }`}
                   data-testid={`alert-cat-${c.key}`}
