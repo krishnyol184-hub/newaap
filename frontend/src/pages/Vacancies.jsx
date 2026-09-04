@@ -45,6 +45,14 @@ const toPosterVacancy = (v) => {
   };
 };
 
+const numPosts = (v) => {
+  const raw = v.structured?.total_posts_num || v.structured?.total_posts ||
+    (String(v.post_name || v.title || "").match(/(\d[\d,]*)\s*(?:posts?|vacanc|seat)/i)?.[1]);
+  return raw ? (parseInt(String(raw).replace(/[^\d]/g, ""), 10) || 0) : 0;
+};
+const isHaryana = (v) => v.state === "haryana" ||
+  /haryana|हरियाणा/i.test(`${v.title || ""} ${v.post_name || ""} ${v.organization || ""}`);
+
 const CAT_LABELS = {
   all: { hi: "सभी", en: "All" },
   admit_card: { hi: "एडमिट कार्ड", en: "Admit Card" },
@@ -293,21 +301,23 @@ const Vacancies = () => {
           </div>
           <PushSubscribeButton lang={lang} />
         </div>
-        <div className="glass-strong px-4 sm:px-5 py-4">
+        <div className="glass-strong px-4 sm:px-5 py-5 rounded-b-2xl shadow-[0_28px_56px_-30px_rgba(0,0,0,0.6)] ring-1 ring-white/5">
           {latestJobs.length === 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {[...Array(9)].map((_, i) => <div key={i} className="h-11 rounded-xl bg-white/5 animate-pulse" />)}
             </div>
           ) : (
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {latestJobs.slice(0, 9).map((v, i) => {
+              {[...latestJobs]
+                .sort((a, b) => (isHaryana(b) - isHaryana(a)) || (numPosts(b) - numPosts(a)))
+                .slice(0, 9).map((v, i) => {
                 const posts = v.structured?.total_posts_num || v.structured?.total_posts ||
                   (String(v.post_name || v.title || "").match(/(\d[\d,]*)\s*(?:posts?|vacanc|seat)/i)?.[1]);
                 return (
                 <li key={v.id || i}>
                   <Link
                     to={`/vacancies/${v.id}`}
-                    className="group flex flex-col h-full rounded-xl bg-white/[0.05] border border-white/10 hover:border-emerald-400/50 hover:bg-emerald-500/10 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-900/30 transition-all duration-200 overflow-hidden"
+                    className="group flex flex-col h-full rounded-2xl bg-white/[0.04] backdrop-blur-sm border border-white/10 shadow-sm shadow-black/10 hover:border-emerald-400/50 hover:bg-emerald-500/10 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-900/30 transition-all duration-200 overflow-hidden"
                     data-testid={`new-update-${i}`}
                   >
                     <div className="flex items-start gap-2.5 px-3.5 pt-3.5 pb-2">
@@ -397,31 +407,29 @@ const Vacancies = () => {
         </div>
       </div>
 
-      {/* Category quick pills — site-theme glass pills with emerald accents */}
+      {/* Category + State filters — dropdowns matching the All Qualifications select */}
       <div id="all-vacancies" className="scroll-mt-28"></div>
-      <div className="mb-2.5 flex gap-2 flex-wrap" data-testid="vacancies-cat-row">
-        {Object.entries(CAT_LABELS).map(([k, v]) => (
-          <button
-            key={k}
-            onClick={() => { setCategory(k); setState("all"); setQualification("all"); scrollToList(); }}
-            className={`pill-3d px-4 py-2 text-xs ${category === k ? "is-active" : ""}`}
-            data-testid={`vac-cat-${k}`}
-          >
-            {lang === "hi" ? v.hi : v.en}
-          </button>
-        ))}
-      </div>
-      <div className="mb-6 flex gap-1.5 flex-wrap" data-testid="vacancies-state-row">
-        {STATES.map((s) => (
-          <button
-            key={s.key}
-            onClick={() => { setState(s.key); setCategory("all"); setQualification("all"); scrollToList(); }}
-            className={`pill-3d px-3 py-1.5 text-[11px] uppercase tracking-wide ${state === s.key ? "is-active" : ""}`}
-            data-testid={`vac-state-${s.key}`}
-          >
-            {lang === "hi" ? s.hi : (STATE_CODES[s.key] || s.en)}
-          </button>
-        ))}
+      <div className="mb-6 flex flex-col sm:flex-row gap-3" data-testid="vacancies-filter-row">
+        <select
+          value={category}
+          onChange={(e) => { setCategory(e.target.value); setState("all"); setQualification("all"); scrollToList(); }}
+          className="input sm:w-56"
+          data-testid="vacancies-category-filter"
+        >
+          {Object.entries(CAT_LABELS).map(([k, v]) => (
+            <option key={k} value={k}>{lang === "hi" ? v.hi : v.en}</option>
+          ))}
+        </select>
+        <select
+          value={state}
+          onChange={(e) => { setState(e.target.value); setCategory("all"); setQualification("all"); scrollToList(); }}
+          className="input sm:w-56"
+          data-testid="vacancies-state-filter"
+        >
+          {STATES.map((s) => (
+            <option key={s.key} value={s.key}>{lang === "hi" ? s.hi : s.en}</option>
+          ))}
+        </select>
       </div>
 
       {/* Vacancy list */}
