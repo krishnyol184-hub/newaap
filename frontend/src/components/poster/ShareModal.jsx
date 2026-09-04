@@ -140,9 +140,19 @@ const ShareModal = ({ vacancy, onClose }) => {
     try {
       const dataUrl = await capture();
       const url = `${SITE_BASE_URL}/vacancies/${vacancy.id}`;
-      const text = encodeURIComponent(
-        `*${displayName}*\n\n${vacancy.jobTitle} — ${vacancy.organization}\nTotal Posts: ${vacancy.totalPosts}\nLast Date: ${vacancy.lastDate}\n\nView full details: ${url}`
-      );
+      const parts = [
+        `*${displayName}*`,
+        "",
+        `🔥 ${vacancy.jobTitle} 🔥`,
+        vacancy.organization ? `🏢 ${vacancy.organization}` : null,
+        `✅ Total Posts: ${vacancy.totalPosts}`,
+        vacancy.qualification ? `🎓 Qualification: ${vacancy.qualification}` : null,
+        `📅 Last Date: ${vacancy.lastDate}`,
+        "",
+        `👇 Full details:`,
+        url,
+      ].filter(Boolean);
+      const text = encodeURIComponent(parts.join("\n"));
       if (dataUrl) {
         const link = document.createElement("a");
         link.download = `${displayName.replace(/\s+/g, "-")}-vacancy-poster.png`;
