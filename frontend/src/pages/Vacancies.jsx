@@ -329,11 +329,21 @@ const Vacancies = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="mt-auto pt-3 flex items-center justify-between gap-2">
-                      <span className="nu-pill">
-                        <FaUsers className="text-[10px]" />
-                        {posts ? `${posts} Posts` : (v.last_date_text || (lang === "hi" ? "विवरण देखें" : "View details"))}
-                      </span>
+                    <div className="mt-auto pt-3 flex items-end justify-between gap-2">
+                      <div className="flex flex-wrap gap-1.5 min-w-0">
+                        {posts && (
+                          <span className="nu-pill"><FaUsers className="text-[10px]" /> {posts} Posts</span>
+                        )}
+                        {v.qualification && (
+                          <span className="nu-pill nu-pill-info"><FaGraduationCap className="text-[10px] shrink-0" /> <span className="truncate max-w-[150px]">{v.qualification}</span></span>
+                        )}
+                        {v.last_date_text && (
+                          <span className="nu-pill nu-pill-date"><FaCalendarAlt className="text-[10px] shrink-0" /> {v.last_date_text}</span>
+                        )}
+                        {!posts && !v.qualification && !v.last_date_text && (
+                          <span className="nu-pill">{lang === "hi" ? "विवरण देखें" : "View details"}</span>
+                        )}
+                      </div>
                       <FaArrowRight className="nu-arrow text-sm shrink-0" />
                     </div>
                   </Link>

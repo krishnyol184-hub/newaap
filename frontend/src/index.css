@@ -1137,15 +1137,19 @@ body.light-theme .detail-val { color: #0f172a; }
 .nu-sub { color: #64748b; font-size: 12px; line-height: 1.45; }
 .nu-pill {
   display: inline-flex; align-items: center; gap: 0.35rem;
-  padding: 0.3rem 0.75rem;
+  padding: 0.3rem 0.7rem;
   border-radius: 999px;
   background: #e6f6ee;
   color: #059669;
   font-size: 11px;
   font-weight: 700;
-  max-width: 72%;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
+.nu-pill-info { background: #e0f2fe; color: #0369a1; }
+.nu-pill-date { background: #fef3c7; color: #b45309; }
+body:not(.light-theme) .nu-pill-info { background: rgba(56, 189, 248, 0.15); color: #7dd3fc; }
+body:not(.light-theme) .nu-pill-date { background: rgba(251, 191, 36, 0.15); color: #fcd34d; }
 .nu-arrow { color: #059669; opacity: 0.65; transition: transform 0.18s ease, opacity 0.18s ease; }
 .nu-card:hover .nu-arrow { opacity: 1; transform: translateX(3px); }
 
