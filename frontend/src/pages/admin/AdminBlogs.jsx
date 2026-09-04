@@ -9,7 +9,7 @@ import { adminApi } from "./adminAuth";
 import { BACKEND_URL as BACKEND } from "@/lib/api";
 
 const inputCls =
-  "w-full px-3 py-2 rounded border border-slate-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none text-sm text-slate-900 bg-white";
+  "w-full px-3 py-2 rounded border border-slate-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none text-sm text-slate-900 bg-white";
 const EMPTY = {
   title: "", excerpt: "", content: "", status: "published",
   categories: [], tags: [], focus_keyword: "", seo_title: "", seo_description: "",
@@ -159,7 +159,7 @@ const AdminBlogs = () => {
       <div data-testid="admin-blogs-page">
         <div className="flex flex-wrap items-center gap-3 mb-5">
           <h1 className="text-[23px] font-normal text-slate-800">Posts</h1>
-          <button onClick={openCreate} className="px-3 py-1 rounded border border-blue-600 text-blue-700 hover:bg-blue-50 text-[13px] font-medium inline-flex items-center gap-1.5" data-testid="admin-add-blog-btn">
+          <button onClick={openCreate} className="px-3 py-1 rounded border border-emerald-600 text-emerald-700 hover:bg-emerald-50 text-[13px] font-medium inline-flex items-center gap-1.5" data-testid="admin-add-blog-btn">
             <FaPlus className="text-[11px]" /> Add New
           </button>
           <span className="ml-auto text-xs text-slate-500">{items.length} posts</span>
@@ -175,19 +175,19 @@ const AdminBlogs = () => {
             <div className="p-10 text-center text-slate-400 text-sm" data-testid="admin-blogs-empty">Koi post nahi hai — pehla article likhein!</div>
           ) : (
             items.map((b) => (
-              <div key={b.id} className="grid grid-cols-1 sm:grid-cols-[1fr_160px_120px_120px] gap-2 items-center px-4 py-3 border-b border-slate-100 hover:bg-blue-50/40 group" data-testid={`admin-blog-row-${b.id}`}>
+              <div key={b.id} className="grid grid-cols-1 sm:grid-cols-[1fr_160px_120px_120px] gap-2 items-center px-4 py-3 border-b border-slate-100 hover:bg-emerald-50/40 group" data-testid={`admin-blog-row-${b.id}`}>
                 <div className="flex items-center gap-3 min-w-0">
                   {b.image_url ? <img src={`${BACKEND}${b.image_url}`} alt="" className="w-11 h-11 rounded object-cover shrink-0" />
                     : <div className="w-11 h-11 rounded bg-slate-100 grid place-items-center shrink-0 text-slate-300"><FaImage /></div>}
                   <div className="min-w-0">
-                    <p className="font-semibold text-blue-800 truncate">{b.title}</p>
+                    <p className="font-semibold text-emerald-800 truncate">{b.title}</p>
                     <p className="text-xs text-slate-400 truncate">/{b.slug}</p>
                   </div>
                 </div>
                 <div className="text-xs text-slate-500 truncate">{(b.categories || []).join(", ") || "—"}</div>
                 <span className={`text-xs font-bold px-2 py-1 rounded-full w-fit ${b.status === "published" ? "text-green-700 bg-green-50" : "text-slate-500 bg-slate-100"}`}>{b.status}</span>
                 <div className="flex items-center gap-1 sm:justify-end">
-                  <a href={`/blogs/${b.slug}`} target="_blank" rel="noreferrer" className="text-xs font-semibold text-blue-700 hover:underline px-2">View</a>
+                  <a href={`/blogs/${b.slug}`} target="_blank" rel="noreferrer" className="text-xs font-semibold text-emerald-700 hover:underline px-2">View</a>
                   <button onClick={() => openEdit(b)} className="p-2 rounded text-slate-500 hover:bg-slate-100" data-testid={`admin-edit-blog-${b.id}`}><FaEdit /></button>
                   <button onClick={() => remove(b)} className="p-2 rounded text-red-500 hover:bg-red-50" data-testid={`admin-delete-blog-${b.id}`}><FaTrash /></button>
                 </div>
@@ -221,7 +221,7 @@ const AdminBlogs = () => {
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
             placeholder="Add title"
-            className="w-full px-4 py-3 rounded border border-slate-300 bg-white text-xl text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none"
+            className="w-full px-4 py-3 rounded border border-slate-300 bg-white text-xl text-slate-900 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none"
             data-testid="admin-blog-title"
           />
 
@@ -253,13 +253,13 @@ const AdminBlogs = () => {
           {/* Rank Math SEO metabox */}
           <div className="bg-white rounded border border-slate-200 shadow-sm" data-testid="rankmath-seo-box">
             <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200">
-              <span className="font-semibold text-slate-800 flex items-center gap-2"><FaCog className="text-blue-600" /> HR SEO</span>
+              <span className="font-semibold text-slate-800 flex items-center gap-2"><FaCog className="text-emerald-600" /> HR SEO</span>
               <span className={`text-xs font-bold px-3 py-1 rounded-full border ${scoreColor}`} data-testid="seo-score-badge">SEO: {seo.score} / 100</span>
             </div>
             <div className="flex border-b border-slate-200 text-[13px]">
               {seoTabs.map((t) => (
                 <button key={t.id} onClick={() => setSeoTab(t.id)}
-                  className={`flex items-center gap-1.5 px-4 py-2.5 border-b-2 -mb-px ${seoTab === t.id ? "border-blue-600 text-blue-700 font-semibold" : "border-transparent text-slate-500 hover:text-slate-700"}`}
+                  className={`flex items-center gap-1.5 px-4 py-2.5 border-b-2 -mb-px ${seoTab === t.id ? "border-emerald-600 text-emerald-700 font-semibold" : "border-transparent text-slate-500 hover:text-slate-700"}`}
                   data-testid={`seo-tab-${t.id}`}>
                   <t.icon className="text-xs" /> {t.label}
                 </button>
@@ -342,7 +342,7 @@ const AdminBlogs = () => {
                 <button type="button" disabled={busy} onClick={() => save("draft")} className="flex-1 px-3 py-2 rounded border border-slate-300 text-slate-700 text-sm font-semibold hover:bg-slate-50 disabled:opacity-60" data-testid="admin-blog-save-draft">
                   Save Draft
                 </button>
-                <button type="button" disabled={busy} onClick={() => save()} className="flex-1 px-3 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold inline-flex items-center justify-center gap-1.5 disabled:opacity-60" data-testid="admin-blog-save">
+                <button type="button" disabled={busy} onClick={() => save()} className="flex-1 px-3 py-2 rounded bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold inline-flex items-center justify-center gap-1.5 disabled:opacity-60" data-testid="admin-blog-save">
                   <FaSave /> {busy ? "…" : editing ? "Update" : "Publish"}
                 </button>
               </div>
@@ -351,34 +351,34 @@ const AdminBlogs = () => {
 
           {/* Categories */}
           <div className="bg-white rounded border border-slate-200 shadow-sm" data-testid="categories-box">
-            <div className="px-4 py-2.5 border-b border-slate-200 font-semibold text-slate-800 text-sm flex items-center gap-2"><FaFolder className="text-blue-600" /> Categories</div>
+            <div className="px-4 py-2.5 border-b border-slate-200 font-semibold text-slate-800 text-sm flex items-center gap-2"><FaFolder className="text-emerald-600" /> Categories</div>
             <div className="p-4">
               <div className="max-h-40 overflow-y-auto space-y-1.5 mb-3">
                 {taxonomy.categories.length === 0 && form.categories.length === 0 && <p className="text-xs text-slate-400">No categories yet — add one below.</p>}
                 {[...new Set([...taxonomy.categories, ...form.categories])].map((c) => (
                   <label key={c} className="flex items-center gap-2 text-[13px] text-slate-700 cursor-pointer">
-                    <input type="checkbox" checked={form.categories.includes(c)} onChange={() => toggleCat(c)} className="accent-blue-600" data-testid={`cat-${c}`} /> {c}
+                    <input type="checkbox" checked={form.categories.includes(c)} onChange={() => toggleCat(c)} className="accent-emerald-600" data-testid={`cat-${c}`} /> {c}
                   </label>
                 ))}
               </div>
               <div className="flex gap-2">
                 <input value={newCat} onChange={(e) => setNewCat(e.target.value)} onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addCat())} placeholder="New category" className={`${inputCls} !py-1.5 text-[13px]`} data-testid="new-category-input" />
-                <button type="button" onClick={addCat} className="px-3 rounded border border-blue-600 text-blue-700 text-[13px] font-semibold hover:bg-blue-50" data-testid="add-category-btn">Add</button>
+                <button type="button" onClick={addCat} className="px-3 rounded border border-emerald-600 text-emerald-700 text-[13px] font-semibold hover:bg-emerald-50" data-testid="add-category-btn">Add</button>
               </div>
             </div>
           </div>
 
           {/* Tags */}
           <div className="bg-white rounded border border-slate-200 shadow-sm" data-testid="tags-box">
-            <div className="px-4 py-2.5 border-b border-slate-200 font-semibold text-slate-800 text-sm flex items-center gap-2"><FaTags className="text-blue-600" /> Tags</div>
+            <div className="px-4 py-2.5 border-b border-slate-200 font-semibold text-slate-800 text-sm flex items-center gap-2"><FaTags className="text-emerald-600" /> Tags</div>
             <div className="p-4">
               <div className="flex gap-2 mb-2">
                 <input value={tagInput} onChange={(e) => setTagInput(e.target.value)} onKeyDown={(e) => (e.key === "Enter" || e.key === ",") && (e.preventDefault(), addTag())} placeholder="Add tag, Enter" className={`${inputCls} !py-1.5 text-[13px]`} data-testid="tag-input" />
-                <button type="button" onClick={() => addTag()} className="px-3 rounded border border-blue-600 text-blue-700 text-[13px] font-semibold hover:bg-blue-50" data-testid="add-tag-btn">Add</button>
+                <button type="button" onClick={() => addTag()} className="px-3 rounded border border-emerald-600 text-emerald-700 text-[13px] font-semibold hover:bg-emerald-50" data-testid="add-tag-btn">Add</button>
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {form.tags.map((t) => (
-                  <span key={t} className="inline-flex items-center gap-1 text-[12px] bg-blue-50 text-blue-700 border border-blue-200 rounded-full px-2 py-0.5" data-testid={`tag-chip-${t}`}>
+                  <span key={t} className="inline-flex items-center gap-1 text-[12px] bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-2 py-0.5" data-testid={`tag-chip-${t}`}>
                     {t} <button type="button" onClick={() => removeTag(t)} className="hover:text-red-500"><FaTimes className="text-[10px]" /></button>
                   </span>
                 ))}
@@ -388,7 +388,7 @@ const AdminBlogs = () => {
                   <p className="text-[11px] text-slate-400 mb-1">Most used</p>
                   <div className="flex flex-wrap gap-1.5">
                     {taxonomy.tags.slice(0, 12).filter((t) => !form.tags.includes(t)).map((t) => (
-                      <button key={t} type="button" onClick={() => addTag(t)} className="text-[12px] text-slate-500 border border-slate-200 rounded-full px-2 py-0.5 hover:border-blue-300 hover:text-blue-700">{t}</button>
+                      <button key={t} type="button" onClick={() => addTag(t)} className="text-[12px] text-slate-500 border border-slate-200 rounded-full px-2 py-0.5 hover:border-emerald-300 hover:text-emerald-700">{t}</button>
                     ))}
                   </div>
                 </div>
@@ -398,7 +398,7 @@ const AdminBlogs = () => {
 
           {/* Featured image */}
           <div className="bg-white rounded border border-slate-200 shadow-sm" data-testid="featured-image-box">
-            <div className="px-4 py-2.5 border-b border-slate-200 font-semibold text-slate-800 text-sm flex items-center gap-2"><FaImage className="text-blue-600" /> Featured image</div>
+            <div className="px-4 py-2.5 border-b border-slate-200 font-semibold text-slate-800 text-sm flex items-center gap-2"><FaImage className="text-emerald-600" /> Featured image</div>
             <div className="p-4">
               {imgPreview ? (
                 <div className="mb-3"><img src={imgPreview} alt="" className="w-full h-36 object-cover rounded border border-slate-200" /></div>
@@ -406,7 +406,7 @@ const AdminBlogs = () => {
                 <div className="mb-3 h-36 rounded border border-dashed border-slate-300 grid place-items-center text-slate-300"><FaImage className="text-3xl" /></div>
               )}
               <input type="file" accept="image/*" onChange={(e) => pickImage(e.target.files?.[0] || null)}
-                className="w-full text-sm text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                className="w-full text-sm text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100"
                 data-testid="admin-blog-image" />
             </div>
           </div>

@@ -259,7 +259,7 @@ const Vacancies = () => {
           <p className="text-slate-400 mt-2 text-sm">
             {lang === "hi" ? "हर 1 घंटे में automatic update।" : "Auto-updated every hour."}
             {stats?.last_updated && (
-              <span className="ml-2 text-blue-400"><FaClock className="inline mr-1" /> {new Date(stats.last_updated).toLocaleString()}</span>
+              <span className="ml-2 text-emerald-400"><FaClock className="inline mr-1" /> {new Date(stats.last_updated).toLocaleString()}</span>
             )}
           </p>
         </div>
@@ -274,8 +274,8 @@ const Vacancies = () => {
       <JobAlertSubscribe />
 
       {/* New Updates — latest vacancies quick list */}
-      <div className="mb-6 rounded-2xl overflow-hidden border border-blue-400/20 shadow-2xl shadow-blue-900/20" data-testid="new-updates-section">
-        <div className="relative bg-gradient-to-r from-[#153e75] via-[#2b6cb0] to-[#3182ce] px-5 py-3.5 flex items-center justify-between gap-3 flex-wrap overflow-hidden">
+      <div className="mb-6 rounded-2xl overflow-hidden border border-emerald-400/20 shadow-2xl shadow-emerald-900/20" data-testid="new-updates-section">
+        <div className="relative bg-gradient-to-r from-[#065f46] via-[#059669] to-[#10b981] px-5 py-3.5 flex items-center justify-between gap-3 flex-wrap overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_120%,rgba(255,255,255,0.15),transparent_50%)] pointer-events-none"></div>
           <div className="relative flex items-center gap-3">
             <span className="relative flex h-3 w-3">
@@ -286,7 +286,7 @@ const Vacancies = () => {
               <h2 className="font-display text-white font-extrabold text-lg sm:text-xl leading-tight tracking-tight">
                 {lang === "hi" ? "नई अपडेट्स" : "New Updates"}
               </h2>
-              <p className="text-blue-100/90 text-[11px] sm:text-xs">
+              <p className="text-emerald-100/90 text-[11px] sm:text-xs">
                 {lang === "hi" ? "आज की ताज़ा सरकारी भर्ती notifications — पूरे भारत से" : "Today's latest government job notifications across India"}
               </p>
             </div>
@@ -307,11 +307,11 @@ const Vacancies = () => {
                 <li key={v.id || i}>
                   <Link
                     to={`/vacancies/${v.id}`}
-                    className="group flex flex-col h-full rounded-xl bg-white/[0.05] border border-white/10 hover:border-blue-400/50 hover:bg-blue-500/10 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-900/30 transition-all duration-200 overflow-hidden"
+                    className="group flex flex-col h-full rounded-xl bg-white/[0.05] border border-white/10 hover:border-emerald-400/50 hover:bg-emerald-500/10 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-900/30 transition-all duration-200 overflow-hidden"
                     data-testid={`new-update-${i}`}
                   >
                     <div className="flex items-start gap-2.5 px-3.5 pt-3.5 pb-2">
-                      <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white grid place-items-center text-xs font-black shrink-0 shadow-md shadow-blue-500/30">
+                      <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 text-white grid place-items-center text-xs font-black shrink-0 shadow-md shadow-emerald-500/30">
                         {i + 1}
                       </span>
                       <span className="text-[13px] font-bold text-slate-100 group-hover:text-white leading-snug line-clamp-2 flex-1">
@@ -320,7 +320,7 @@ const Vacancies = () => {
                     </div>
                     <div className="mt-auto px-3.5 pb-3 flex items-center gap-2 flex-wrap">
                       {posts && (
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-blue-300 bg-blue-500/15 border border-blue-500/30 px-2 py-0.5 rounded-full">
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-300 bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 rounded-full">
                           <FaUsers className="text-[9px]" /> {posts} Posts
                         </span>
                       )}
@@ -334,7 +334,7 @@ const Vacancies = () => {
                           <FaCalendarAlt className="text-[9px] shrink-0" /> {v.last_date_text}
                         </span>
                       )}
-                      <FaChevronRight className="ml-auto text-[10px] text-blue-400 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                      <FaChevronRight className="ml-auto text-[10px] text-emerald-400 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
                     </div>
                   </Link>
                 </li>
@@ -362,19 +362,19 @@ const Vacancies = () => {
             <span className="w-10 h-10 rounded-full bg-[#25D366] text-white grid place-items-center text-xl shrink-0"><FaWhatsapp /></span>
             <div>
               <div className="text-white font-bold text-sm">{lang === "hi" ? "हर नई भर्ती की Instant Alert" : "Instant Alerts for Every New Vacancy"}</div>
-              <div className="text-blue-100/80 text-xs">{lang === "hi" ? "WhatsApp चैनल join करें — summary सीधे आपके phone पर" : "Join our WhatsApp Channel — summaries straight to your phone"}</div>
+              <div className="text-emerald-100/80 text-xs">{lang === "hi" ? "WhatsApp चैनल join करें — summary सीधे आपके phone पर" : "Join our WhatsApp Channel — summaries straight to your phone"}</div>
             </div>
           </div>
-          <a href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noreferrer" className="shrink-0 inline-flex items-center gap-2 bg-white text-[#075E54] text-sm font-extrabold px-5 py-2.5 rounded-full hover:bg-blue-50 transition" data-testid="banner-join-whatsapp-button">
+          <a href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noreferrer" className="shrink-0 inline-flex items-center gap-2 bg-white text-[#075E54] text-sm font-extrabold px-5 py-2.5 rounded-full hover:bg-emerald-50 transition" data-testid="banner-join-whatsapp-button">
             <FaWhatsapp /> {lang === "hi" ? "WhatsApp Channel Join करें" : "Join WhatsApp Channel"}
           </a>
         </div>
       </div>
 
       {/* Search + Filters — premium panel with subtle gradient border */}
-      <div className="relative rounded-2xl p-[1px] bg-gradient-to-br from-blue-500/30 via-transparent to-amber-500/20 mb-6" data-testid="vacancies-filter-panel">
+      <div className="relative rounded-2xl p-[1px] bg-gradient-to-br from-emerald-500/30 via-transparent to-amber-500/20 mb-6" data-testid="vacancies-filter-panel">
         <div className="glass-strong rounded-2xl p-5 space-y-4 relative overflow-hidden">
-          <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-blue-500/8 blur-3xl pointer-events-none"></div>
+          <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-emerald-500/8 blur-3xl pointer-events-none"></div>
           <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-amber-500/8 blur-3xl pointer-events-none"></div>
           <div className="relative flex flex-col md:flex-row gap-3">
             <form onSubmit={(e) => { e.preventDefault(); if (page !== 1) setPage(1); else load(); }} className="input-icon-wrap flex-1">
@@ -440,7 +440,7 @@ const Vacancies = () => {
             const expired = (v.is_expired === true) || (days !== null && days < 0);
             return (
               <Link key={v.id || v.url + i} to={`/vacancies/${v.id}`}
-                className={`glass p-4 hover:border-blue-500/40 transition group block relative ${expired ? "opacity-60" : ""} ${urgent ? "ring-2 ring-red-500/40" : ""}`}
+                className={`glass p-4 hover:border-emerald-500/40 transition group block relative ${expired ? "opacity-60" : ""} ${urgent ? "ring-2 ring-red-500/40" : ""}`}
                 data-testid={`vacancy-${i}`}>
                 {/* URGENT / EXPIRED banner — bright, top strip so it's the first thing users notice */}
                 {expired && (
@@ -460,7 +460,7 @@ const Vacancies = () => {
                 <button
                   type="button"
                   onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShareVac(toPosterVacancy(v)); }}
-                  className="absolute top-2 right-2 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-400 hover:to-blue-500 text-white text-[10px] font-bold shadow-lg shadow-blue-500/30 z-10 transition-transform hover:scale-105 border border-blue-300/40"
+                  className="absolute top-2 right-2 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white text-[10px] font-bold shadow-lg shadow-emerald-500/30 z-10 transition-transform hover:scale-105 border border-emerald-300/40"
                   data-testid={`vacancy-share-${i}`}
                   title={lang === "hi" ? "पोस्टर बनाएँ और शेयर करें" : "Generate poster & share"}
                   aria-label="Share vacancy poster"
@@ -505,7 +505,7 @@ const Vacancies = () => {
                       </span>
                     )}
                     {v.application_mode === "online" && (
-                      <span className="chip !text-[10px] !bg-blue-500/10 !text-blue-300 !border-blue-500/30" data-testid={`vacancy-mode-online-${i}`}>
+                      <span className="chip !text-[10px] !bg-emerald-500/10 !text-emerald-300 !border-emerald-500/30" data-testid={`vacancy-mode-online-${i}`}>
                         <FaGlobe className="inline mr-1 text-[9px]" /> {lang === "hi" ? "ऑनलाइन फॉर्म" : "Online Form"}
                       </span>
                     )}
@@ -516,7 +516,7 @@ const Vacancies = () => {
                 </div>
                 {v.qualification && (
                   <div className="text-[11px] text-slate-400 mb-2 line-clamp-1">
-                    <FaGraduationCap className="inline mr-1 text-blue-400" />{v.qualification}
+                    <FaGraduationCap className="inline mr-1 text-emerald-400" />{v.qualification}
                   </div>
                 )}
                 <div className="flex items-center gap-3 text-xs text-slate-500 flex-wrap">
@@ -524,14 +524,14 @@ const Vacancies = () => {
                     <span className={urgent ? "text-red-400 font-semibold" : expired ? "text-slate-600 line-through" : ""}>
                       <FaCalendarAlt className="inline mr-1 text-amber-400" /> {v.last_date_text}
                       {days !== null && days >= 0 && !expired && (
-                        <span className={`ml-1 ${urgent ? "text-red-400" : "text-blue-400"}`}>
+                        <span className={`ml-1 ${urgent ? "text-red-400" : "text-emerald-400"}`}>
                           ({days === 0 ? (lang === "hi" ? "आज" : "today") : lang === "hi" ? `${days} दिन बाकी` : `${days}d left`})
                         </span>
                       )}
                       {expired && <span className="ml-1">({lang === "hi" ? "समाप्त" : "closed"})</span>}
                     </span>
                   )}
-                  <span className="ml-auto text-blue-400">{lang === "hi" ? "विवरण देखें" : "View Details"} <FaChevronRight className="inline text-[10px]" /></span>
+                  <span className="ml-auto text-emerald-400">{lang === "hi" ? "विवरण देखें" : "View Details"} <FaChevronRight className="inline text-[10px]" /></span>
                 </div>
               </Link>
             );
@@ -550,7 +550,7 @@ const Vacancies = () => {
             const p = start + i;
             if (p > pages) return null;
             return (
-              <button key={p} onClick={() => setPage(p)} className={`chip ${p === page ? "!bg-blue-500 !text-white !border-blue-400" : ""}`} data-testid={`jobs-pagination-page-${p}`}>{p}</button>
+              <button key={p} onClick={() => setPage(p)} className={`chip ${p === page ? "!bg-emerald-500 !text-white !border-emerald-400" : ""}`} data-testid={`jobs-pagination-page-${p}`}>{p}</button>
             );
           })}
           <button onClick={() => setPage((p) => Math.min(pages, p + 1))} disabled={page >= pages} className="chip disabled:opacity-40" data-testid="jobs-pagination-next-button">

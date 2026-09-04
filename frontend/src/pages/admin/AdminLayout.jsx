@@ -19,7 +19,7 @@ const AdminLayout = () => {
   const linkClass = ({ isActive }) =>
     `flex items-center gap-3 px-4 py-2.5 text-[13px] font-medium transition-colors border-l-[3px] ${
       isActive
-        ? "bg-[#2271b1] text-white border-white"
+        ? "bg-[#059669] text-white border-white"
         : "text-[#c3c4c7] border-transparent hover:text-white hover:bg-white/5"
     }`;
 
