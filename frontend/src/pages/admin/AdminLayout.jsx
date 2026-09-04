@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Outlet, Link, NavLink, useNavigate, Navigate } from "react-router-dom";
 import {
   FaTachometerAlt, FaThumbtack, FaSearch, FaEdit, FaSignOutAlt, FaHome,
-  FaExternalLinkAlt, FaBriefcase, FaNewspaper, FaFileAlt, FaBars, FaWordpress, FaUserCircle
+  FaExternalLinkAlt, FaBriefcase, FaNewspaper, FaFileAlt, FaBars, FaWordpress, FaUserCircle, FaChartLine
 } from "react-icons/fa";
 import { getAdminToken, clearAdminToken } from "./adminAuth";
 
@@ -30,6 +30,7 @@ const AdminLayout = () => {
     { to: "/admin/job-seo", label: "Job SEO", icon: FaSearch, testid: "admin-nav-job-seo" },
     { to: "/admin/resumes", label: "CV Templates", icon: FaFileAlt, testid: "admin-nav-resumes" },
     { to: "/admin/seo", label: "Site SEO", icon: FaNewspaper, testid: "admin-nav-seo" },
+    { to: "/admin/integrations", label: "Analytics & SEO", icon: FaChartLine, testid: "admin-nav-integrations" },
     { to: "/admin/content", label: "Front-page Text", icon: FaEdit, testid: "admin-nav-content" },
   ];
 

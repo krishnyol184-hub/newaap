@@ -1682,6 +1682,25 @@ async def admin_blog_taxonomy(_=Depends(require_admin)):
     }
 
 
+@api.get("/site-settings")
+async def get_site_settings():
+    doc = await db.settings.find_one({"_id": "site"}) or {}
+    return {
+        "ga4_id": doc.get("ga4_id", ""),
+        "gsc_verification": doc.get("gsc_verification", ""),
+    }
+
+
+@api.put("/admin/site-settings")
+async def update_site_settings(payload: dict = Body(...), _=Depends(require_admin)):
+    update = {
+        "ga4_id": str(payload.get("ga4_id", "")).strip()[:40],
+        "gsc_verification": str(payload.get("gsc_verification", "")).strip()[:400],
+    }
+    await db.settings.update_one({"_id": "site"}, {"$set": update}, upsert=True)
+    return {"ok": True, **update}
+
+
 @api.put("/admin/blogs/{blog_id}")
 async def admin_update_blog(
     blog_id: str,

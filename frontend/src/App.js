@@ -37,6 +37,8 @@ import AdminVacancies from "@/pages/admin/AdminVacancies";
 import AdminJobSEO from "@/pages/admin/AdminJobSEO";
 import AdminBlogs from "@/pages/admin/AdminBlogs";
 import AdminResumes from "@/pages/admin/AdminResumes";
+import AdminIntegrations from "@/pages/admin/AdminIntegrations";
+import SeoHead from "@/components/SeoHead";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -82,6 +84,7 @@ function AppRouter() {
         <Route path="job-seo" element={<AdminJobSEO />} />
         <Route path="blogs" element={<AdminBlogs />} />
         <Route path="resumes" element={<AdminResumes />} />
+        <Route path="integrations" element={<AdminIntegrations />} />
       </Route>
 
       <Route path="*" element={
@@ -115,6 +118,7 @@ function AppInner() {
       <BrowserRouter>
         <ScrollToTop />
         <ProcessingLoader />
+        <SeoHead />
         <ChromeWrap>
           <AppRouter />
         </ChromeWrap>
