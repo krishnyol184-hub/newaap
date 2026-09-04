@@ -8,8 +8,8 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0b1120;
-  --bg-2: #111a2e;
+  --bg: #0e1e30;
+  --bg-2: #13273c;
   --panel: rgba(30, 41, 59, 0.55);
   --panel-solid: #111a2e;
   --border: rgba(148, 163, 184, 0.12);
@@ -674,7 +674,7 @@ body.light-theme .input option:checked {
 
 /* Light theme fallback (for a11y toggle) */
 body.light-theme {
-  --bg: #F5F4EC;
+  --bg: #F1ECDE;
   --bg-2: #ffffff;
   --panel: rgba(255, 255, 255, 0.78);
   --panel-solid: #ffffff;
@@ -684,7 +684,7 @@ body.light-theme {
   --text-dim: #475569;
   --muted: #64748b;
   --emerald-soft: rgba(13, 148, 136, 0.08);
-  background: #F5F4EC;
+  background: #F1ECDE;
   color: #1E293B;
 }
 body.light-theme::-webkit-scrollbar-track { background: #e8ede9; }

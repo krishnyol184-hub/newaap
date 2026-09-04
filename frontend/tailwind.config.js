@@ -50,7 +50,7 @@ module.exports = {
           DEFAULT: '#25D366',
           dark: '#128C7E'
         },
-        bg: '#F5F4EC',
+        bg: '#F1ECDE',
         text: '#1E293B',
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
